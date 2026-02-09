@@ -9,8 +9,8 @@ package modelos;
  * @author chris
  */
 public class ContacXMen implements Comparable<ContacXMen> {
-    
-    private Persona persona; 
+
+    private Persona persona;
     private String telefono;
     private String email;
 
@@ -21,21 +21,34 @@ public class ContacXMen implements Comparable<ContacXMen> {
     }
 
     // Getters y Setters necesarios
-    public Persona getPersona() { return persona; }
-    public String getTelefono() { return telefono; }
-    public String getEmail() { return email; }
+    public Persona getPersona() {
+        return persona;
+    }
 
-    /**
-     * Método para mostrar la info tal cual aparece en el PDF.
-     * Recibe la posición (id) desde el iterador de la agenda.
-     * @param id
-     */
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
     public void presentarInfoTabulada(int id) {
         // Formato: [ID] NOMBRE TELÉFONO EMAIL usando tabuladores
-        System.out.println("[" + id + "]\t" + 
-                           persona.getNombre() + "\t" + 
-                           this.telefono + "\t" + 
-                           this.email);
+        System.out.println("[" + id + "]\t" + persona.getNombre() + "\t\t" + this.telefono + "\t" + this.email);
     }
 
     @Override
@@ -43,4 +56,5 @@ public class ContacXMen implements Comparable<ContacXMen> {
         // Criterio de ordenación natural por nombre
         return this.persona.getNombre().compareToIgnoreCase(otro.getPersona().getNombre());
     }
+
 }
