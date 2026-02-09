@@ -7,12 +7,54 @@ package controlador;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import miLibreria.Utiles;
 
 /**
  *
  * @author chris
  */
 public class AgendaXMEN {
+//---------------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------------
+    private static final String USER_VALIDO = "profesorx";
+    private static final String PASS_VALIDO = "macarena";
+
+    public static void controlAcceso() throws IOException {
+        InputStreamReader flujo = new InputStreamReader(System.in, "ISO-8859-1");
+        BufferedReader teclado = new BufferedReader(flujo);
+        System.out.println("----------------------------------------------------");
+        System.out.println("CONTROL DE ACCESO");
+        System.out.println("----------------------------------------------------");
+        String user;
+        String pass;
+        int intentos = 3;
+        boolean accesoConcedido = false;
+        while (intentos > 0 && !accesoConcedido) {
+            System.out.print("Introduce usuario: ");
+            user = teclado.readLine();
+
+            System.out.print("Introduce contraseña: ");
+            pass = teclado.readLine();
+
+            if (user.equals(USER_VALIDO) && pass.equals(PASS_VALIDO)) {
+                accesoConcedido = true;
+                System.out.println("\nAcceso concedido.\n");
+                Utiles.Pausar();
+                Utiles.LimpiarPantalla();
+                menuProfesor();
+            } else {
+                intentos--;
+                System.out.println("Credenciales incorrectas.");
+                System.out.println("Intentos restantes: " + intentos + "\n");
+            }
+        }
+
+        if (!accesoConcedido) {
+            System.out.println("Acceso bloqueado. Demasiados intentos fallidos.");
+        }
+    }
+//-----------------------------------------------------------------------------------
 
     public static void menuProfesor() throws IOException {
         InputStreamReader flujo = new InputStreamReader(System.in, "ISO-8859-1");
@@ -108,5 +150,5 @@ public class AgendaXMEN {
         }
 
     }
-
+//--------------------------------------------------------------------------------
 }
