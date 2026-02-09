@@ -7,7 +7,11 @@ package controlador;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Iterator;
+import java.util.TreeSet;
+import miLibreria.Leer;
 import miLibreria.Utiles;
+import modelos.ContacXMen;
 
 /**
  *
@@ -16,6 +20,7 @@ import miLibreria.Utiles;
 public class AgendaXMEN {
 //---------------------------------------------------------------------------------
 
+    private static TreeSet<ContacXMen> listaContactos = new TreeSet();
 //---------------------------------------------------------------------------------
     private static final String USER_VALIDO = "profesorx";
     private static final String PASS_VALIDO = "macarena";
@@ -106,25 +111,42 @@ public class AgendaXMEN {
             case 1:
                 System.out.println("Mostrando contenido resumido de la agenda:");
                 System.out.println("------------------------------------------");
-                
+                if (listaContactos.isEmpty()) {
+                    System.out.println("\tLa agenda está vacía.");
+                } else {
+                    Iterator<ContacXMen> it = listaContactos.iterator();
+                    int i = 1;
+
+                    while (it.hasNext()) {
+                        ContacXMen c = it.next();
+                        c.presentarInfoTabulada(i);
+                        i++;
+                    }
+                }
                 Utiles.Pausar();
                 break;
             case 2:
                 System.out.println("Mostrando contenido resumido de la agenda:");
                 System.out.println("------------------------------------------");
-                
+
                 Utiles.Pausar();
                 break;
             case 3:
                 System.out.println("->->->-> Rellenando con los clásicos ->->->->");
                 System.out.println("------------------------------------------");
-                
+
                 Utiles.Pausar();
                 break;
             case 4:
+                String nombre,
+                 telefono,
+                 mail;
                 System.out.println("Añadiendo XMen con sus datos básicos:");
                 System.out.println("------------------------------------------");
-                
+                nombre = Leer.LeerCadena("Introduce el nombre: ");
+                telefono = Leer.LeerTelefono("Introduce su teléfono: ");
+                mail = Leer.LeerEmail("Introduce su email: ");
+                System.out.println("Contacto guardado correctamente.");
                 Utiles.Pausar();
                 break;
             case 5:
