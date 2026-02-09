@@ -161,6 +161,65 @@ public class Leer {
         return telefono;
     }
 
+    public static void menuProfesor() throws IOException {
+        InputStreamReader flujo = new InputStreamReader(System.in, "ISO-8859-1");
+        BufferedReader teclado = new BufferedReader(flujo);
+        int opcionMenu;
+        do {
+            System.out.println("====================================================");
+            System.out.println("\tAGENDA DE CONTACTOS DE XMEN");
+            System.out.println("====================================================");
+            System.out.println("1. Ver agenda resumida");
+            System.out.println("2. ver agenda completa");
+            System.out.println("3. Importar XMen de confianza");
+            System.out.println("4. Añadir XMen datos básicos");
+            System.out.println("5. Editar XMen por nombre");
+            System.out.println("6. Buscar Superhéroe por número de posición");
+            System.out.println("7. Busca Xmen por nombre");
+            System.out.println("8. Eliminar XMen por numero de posición");
+            System.out.println("9. Eliminar Xmen por  nombre");
+            System.out.println("10. Activar XMen");
+            System.out.println("99. Vaciar Agenda");
+            System.out.println("0. Salir");
+            System.out.print("Seleccione una opción: ");
+
+            opcionMenu = Integer.parseInt(s);
+
+            switch (opcionMenu) {
+                case 1:
+                    System.out.println("1. Ver agenda resumida");
+                    break;
+                case 2:
+                    System.out.println("2. ver agenda completa");
+                    break;
+                case 3:
+                    System.out.println("3. Importar XMen de confianza");
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+                case 9:
+                    break;
+                case 10:
+                    break;
+                case 99:
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Opción no válida.");
+            }
+
+        } while (opcionMenu != 0);
+    }
+
     // ============================
     //  MÉTODOS DE VALIDACIÓN DE NÚMEROS
     // ============================
@@ -350,19 +409,6 @@ public class Leer {
      */
     public static boolean EsRango(int valor, int min, int max) {
         return valor >= min && valor <= max;
-    }
-
-    /**
-     * Capitaliza la primera letra de una cadena
-     *
-     * @param texto
-     * @return
-     */
-    public static String Capitalizar(String texto) {
-        if (texto == null || texto.isEmpty()) {
-            return texto;
-        }
-        return texto.substring(0, 1).toUpperCase() + texto.substring(1).toLowerCase();
     }
 
     // ============================
