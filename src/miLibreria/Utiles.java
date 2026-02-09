@@ -13,6 +13,25 @@ import java.io.InputStreamReader;
  * @author chris
  */
 public class Utiles {
+    // ============================
+    // XMEN
+    // ============================
+    public static void mostrarSecuestro() throws IOException {
+    int aleatorio = (int) (Math.random() * 2);
+
+    if (aleatorio == 0) {
+        System.out.println("Se ha secuestrado a un XMen llamdo/a Mujer Relámpago, Magneto debe estar detrás.");
+        System.out.println("<<<<<<<<<<<<<<<<<< ACTIVANDO ALARMA >>>>>>>>>>>>>>>>>>");
+        Pausar();
+        LimpiarPantalla();
+    } else {
+        System.out.println("Se ha secuestrado un Civil llamdo/a Andrés, puede morir en cualquier momento, el tiempo apremia.");
+        System.out.println("<<<<<<<<<<<<<<<<<< ACTIVANDO ALARMA >>>>>>>>>>>>>>>>>>");
+        Pausar();
+        LimpiarPantalla();
+    }
+}
+
 
     // ============================
     //  FORMATO Y PRESENTACIÓN
