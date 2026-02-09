@@ -19,6 +19,7 @@ public class principal {
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
+        
         Utiles.mostrarSecuestro();
         AgendaXMEN.controlAcceso();
         AgendaXMEN.menuProfesor();

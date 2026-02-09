@@ -37,7 +37,7 @@ public class AgendaXMEN {
             System.out.print("Introduce contraseña: ");
             pass = teclado.readLine();
 
-            if (user.equals(USER_VALIDO) && pass.equals(PASS_VALIDO)) {
+            if (user.equalsIgnoreCase(USER_VALIDO) && pass.equalsIgnoreCase(PASS_VALIDO)) {
                 accesoConcedido = true;
                 System.out.println("\nAcceso concedido.\n");
                 Utiles.Pausar();
@@ -101,19 +101,31 @@ public class AgendaXMEN {
         return opcion;
     }
 
-    private static void switchMenu(int opcionMenu) {
+    private static void switchMenu(int opcionMenu) throws IOException {
         switch (opcionMenu) {
             case 1:
-                System.out.println("1. Ver agenda resumida");
+                System.out.println("Mostrando contenido resumido de la agenda:");
+                System.out.println("------------------------------------------");
+                
+                Utiles.Pausar();
                 break;
             case 2:
-                System.out.println("2. ver agenda completa");
+                System.out.println("Mostrando contenido resumido de la agenda:");
+                System.out.println("------------------------------------------");
+                
+                Utiles.Pausar();
                 break;
             case 3:
-                System.out.println("3. Importar XMen de confianza");
+                System.out.println("->->->-> Rellenando con los clásicos ->->->->");
+                System.out.println("------------------------------------------");
+                
+                Utiles.Pausar();
                 break;
             case 4:
-                System.out.println("4. Añadir XMen datos básicos");
+                System.out.println("Añadiendo XMen con sus datos básicos:");
+                System.out.println("------------------------------------------");
+                
+                Utiles.Pausar();
                 break;
             case 5:
                 System.out.println("5. Editar XMen por nombre");
