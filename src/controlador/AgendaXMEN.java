@@ -178,7 +178,6 @@ public class AgendaXMEN {
             case 4:
                 System.out.println("Añádiendo XMen con sus datos básicos:");
                 System.out.println("------------------------------------------");
-
                 //Pedir datos
                 String nombre = Leer.LeerCadena("Introduce el nombre: ");
                 String telefono = Leer.LeerTelefono("Introduce su tel�fono: ");
@@ -198,23 +197,24 @@ public class AgendaXMEN {
                 break;
             case 5:
                 System.out.println("5. Editar XMen por nombre");
-                String nombreAEditar=Leer.LeerCadena("Introduce el nombre del superhéroe: ");
-                ContacXMen contactoEncontrado=null;
+                System.out.println("------------------------------------------");
+                String nombreAEditar = Leer.LeerCadena("Introduce el nombre del superhéroe: ");
+                ContacXMen contactoEncontrado = null;
                 //barremos con un fore para buscar el contacto/XMen
                 for (ContacXMen c : listaContactos) {
                     if (c.getPersona().getNombre().equalsIgnoreCase(nombreAEditar)) {
-                        contactoEncontrado=c;
+                        contactoEncontrado = c;
                         break;
                     }
                 }
-                if (contactoEncontrado!=null) {
+                if (contactoEncontrado != null) {
                     //Actualicemos telefono y email
-                    String nuevoTelefono=Leer.LeerTelefono("Introduce el nuevo telefono: ");
-                    String nuevoMail=Leer.LeerEmail("Introduce el nuevo email: ");
+                    String nuevoTelefono = Leer.LeerTelefono("Introduce el nuevo telefono: ");
+                    String nuevoMail = Leer.LeerEmail("Introduce el nuevo email: ");
                     contactoEncontrado.setTelefono(nuevoTelefono);
                     contactoEncontrado.setEmail(nuevoMail);
                     System.out.println("Datos editados correctamente.");
-                }else {
+                } else {
                     System.out.println("No se encontro el contacto");
                 }
                 Utiles.Pausar();
@@ -224,23 +224,23 @@ public class AgendaXMEN {
                 System.out.println("------------------------------------------");
                 if (listaContactos.isEmpty()) {
                     System.out.println("\tLa agenda está vacía.");
-                }else {
-                    int numBusqueda=Leer.LeerEnteroPositivo("Introduce la posición del XMen: ");
-                    if (numBusqueda>listaContactos.size()) {
+                } else {
+                    int numBusqueda = Leer.LeerEnteroPositivo("Introduce la posición del XMen: ");
+                    if (numBusqueda > listaContactos.size()) {
                         System.out.println("\tError: Los IDs que hay son: " + listaContactos.size());
-                    }else{
+                    } else {
                         Iterator<ContacXMen> itNumero = listaContactos.iterator();
-                        ContacXMen encontrado=null;
-                        int contador=1;
+                        ContacXMen encontrado = null;
+                        int contador = 1;
                         while (itNumero.hasNext()) {
-                            ContacXMen actual=itNumero.next();
-                            if (contador==numBusqueda) {
-                                encontrado=actual;
+                            ContacXMen actual = itNumero.next();
+                            if (contador == numBusqueda) {
+                                encontrado = actual;
                                 break;
                             }
                             contador++;
                         }
-                        if (encontrado!=null) {
+                        if (encontrado != null) {
                             System.out.println(encontrado.toString());
                         }
                     }
@@ -249,6 +249,7 @@ public class AgendaXMEN {
                 break;
             case 7:
                 System.out.println("7. Busca Xmen por nombre");
+                System.out.println("------------------------------------------");
                 String nombreBuscar = Leer.LeerCadena("Introduce el nombre del superhéroe a buscar: ");
 
                 boolean encontrado = false;
@@ -278,11 +279,39 @@ public class AgendaXMEN {
 
                 break;
             case 8:
-                System.out.println("8. Eliminar XMen por numero de posici�n");
+                System.out.println("8. Eliminar XMen por numero de posicion"); // Evita tildes si dan error
+                System.out.println("------------------------------------------");
 
+                if (listaContactos.isEmpty()) {
+                    System.out.println("\tLa agenda ya esta vacia.");
+                } else {
+                    int numEliminar = Leer.LeerEnteroPositivo("Introduce la posicion del XMen a borrar: ");
+
+                    if (numEliminar > listaContactos.size()) {
+                        System.out.println("\tError: Solo hay " + listaContactos.size() + " contactos.");
+                    } else {
+                        Iterator<ContacXMen> itNumero = listaContactos.iterator();
+                        int contador = 1;
+
+                        while (itNumero.hasNext()) {
+                            itNumero.next();
+
+                            if (contador == numEliminar) {
+                                itNumero.remove();
+                                System.out.println("\tContacto en posicion [" + numEliminar + "] eliminado.");
+                                break;
+                            }
+                            contador++;
+                        }
+                    }
+                }
+
+                Utiles.Pausar();
                 break;
             case 9:
                 System.out.println("9. Eliminar Xmen por  nombre");
+                System.out.println("------------------------------------------");
+
                 if (listaContactos.isEmpty()) {
                     System.out.println("No hay nada en la agenda");
                 } else {
@@ -308,18 +337,50 @@ public class AgendaXMEN {
                 break;
             case 10:
                 System.out.println("10. Activar XMen");
+                System.out.println("------------------------------------------");
+                if (listaContactos.isEmpty()) {
+                    System.out.println("\tNo hay héroes en la agenda para la misión.");
+                } else {
+                    // 1. Simulamos el peligro (usando tu método de Utiles)
+                    Utiles.mostrarSecuestro();
+
+                    // 2. Elegimos a un héroe de la agenda para la misión
+                    // Para variar, vamos a elegir al primero de la lista (el que esté más cerca)
+                    ContacXMen contactoMision = listaContactos.first(); // TreeSet permite pillar el primero fácilmente
+                    XMen heroe = (XMen) contactoMision.getPersona(); // Casting a XMen para acceder a sus poderes
+
+                    System.out.println("¡Alerta! El profesor X ha enviado a: " + heroe.getNombre());
+                    System.out.println("------------------------------------------");
+
+                    // 3. Ejecutamos sus acciones especiales (Polimorfismo e Interfaces)
+                    heroe.decirFraseLlegada();
+                    heroe.volar();           // Viene de la interfaz Superpoder
+                    heroe.superFuerza();     // Viene de la interfaz Superpoder
+
+                    // 4. Usamos el método salvar (Sobrecarga)
+                    // Creamos un Civil rápido para rescatarlo
+                    Civil victima = new Civil("Andres", 25, 1.75f, Persona.Sexo.HOMBRE);
+                    heroe.salvar(victima);
+
+                    System.out.println("------------------------------------------");
+                    System.out.println("¡Misión cumplida! El civil está a salvo.");
+                }
+
+                Utiles.Pausar();
 
                 break;
             case 99:
                 System.out.println("99. Vaciar Agenda");
+                System.out.println("------------------------------------------");
+
                 if (listaContactos.isEmpty()) {
                     System.out.println("No hay nada en la agenda");
-                }else {
-                    char respuesta=Leer.confirmarSoN("¿Quieres elimirar toda la agenda? (s/n)");
-                    if (respuesta == 's'|| respuesta == 'S') {
+                } else {
+                    char respuesta = Leer.confirmarSoN("¿Quieres elimirar toda la agenda? (s/n)");
+                    if (respuesta == 's' || respuesta == 'S') {
                         listaContactos.clear();//Eliminamos todo los heroes/civiles de la agenda
                         System.out.println("\tLa agenda ha sido borrada");
-                    }else  {
+                    } else {
                         System.out.println("Operaicon cancelada");
                     }
                 }
@@ -327,6 +388,7 @@ public class AgendaXMEN {
                 break;
             case 0:
                 System.out.println("0. Saliendo de los contactos");
+                System.out.println("------------------------------------------");
 
                 break;
             default:
