@@ -161,7 +161,15 @@ public class Leer {
         return telefono;
     }
 
-    
+    public static char confirmarSoN(String mensaje) throws IOException {
+        char letra = 0;
+        do {
+            letra = LeerCaracter(mensaje);
+        } while (letra != 's' && letra != 'n'
+                && letra != 'S' && letra != 'N');
+
+        return letra;
+    }
 
     // ============================
     //  MÉTODOS DE VALIDACIÓN DE NÚMEROS
