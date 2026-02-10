@@ -56,5 +56,8 @@ public class ContacXMen implements Comparable<ContacXMen> {
         // Criterio de ordenación natural por nombre
         return this.persona.getNombre().compareToIgnoreCase(otro.getPersona().getNombre());
     }
-
+    @Override
+    public String toString() {
+        return "ContactoSuperHeroe{" + persona.toString() + ", telefono=" + telefono + ", email=" + email + "}";
+    }
 }

@@ -17,7 +17,9 @@ public abstract class Persona {
 
     public enum Sexo {
         HOMBRE, MUJER, OTRO
-    };
+    }
+
+    ;
 
     public Persona() {
     }
@@ -64,6 +66,11 @@ public abstract class Persona {
 
     public void setSexo(Sexo sexo) {
         this.sexo = sexo;
+    }
+
+    @Override
+    public String toString() {
+        return "Persona{" + "nombre=" + nombre + ", edad=" + edad + ", altura=" + altura + ", sexo=" + sexo.toString() + '}';
     }
 
     public abstract void presentarInfo();

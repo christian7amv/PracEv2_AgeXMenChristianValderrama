@@ -69,6 +69,9 @@ public class XMen extends Persona implements Superpoder {
     public void salvar(XMen compañero) {
         System.out.println(this.nombre + " apoya en combate a " + compañero.getNombre());
     }
+//    public void salvar(XMen compañero) {
+//        System.out.println(this.nombre + " apoya en combate a " + compañero.getNombre());
+//    }
 
     @Override
     public void presentarInfo() {
@@ -93,4 +96,8 @@ public class XMen extends Persona implements Superpoder {
         System.out.println(nombre + " ha levantado un tanque con una mano.");
     }
 
+    @Override
+    public String toString() {
+        return "Superheroe{" + super.toString() + " esAnonimo=" + esAnonimo + ", usaArtefactos=" + usaArtefactos + ", fraseTipica=" + fraseTipica + "}";
+    }
 }

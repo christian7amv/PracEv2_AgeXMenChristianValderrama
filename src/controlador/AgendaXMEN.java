@@ -40,7 +40,7 @@ public class AgendaXMEN {
             System.out.print("Introduce usuario: ");
             user = teclado.readLine();
 
-            System.out.print("Introduce contrase�a: ");
+            System.out.print("Introduce contraseña: ");
             pass = teclado.readLine();
 
             if (user.equalsIgnoreCase(USER_VALIDO) && pass.equalsIgnoreCase(PASS_VALIDO)) {
@@ -81,16 +81,16 @@ public class AgendaXMEN {
         System.out.println("1. Ver agenda resumida");
         System.out.println("2. ver agenda completa");
         System.out.println("3. Importar XMen de confianza");
-        System.out.println("4. A�adir XMen datos b�sicos");
+        System.out.println("4. Añadir XMen datos básicos");
         System.out.println("5. Editar XMen por nombre");
-        System.out.println("6. Buscar Superh�roe por n�mero de posici�n");
+        System.out.println("6. Buscar Superhéroe por número de posición");
         System.out.println("7. Busca Xmen por nombre");
-        System.out.println("8. Eliminar XMen por numero de posici�n");
+        System.out.println("8. Eliminar XMen por numero de posición");
         System.out.println("9. Eliminar Xmen por  nombre");
         System.out.println("10. Activar XMen");
         System.out.println("99. Vaciar Agenda");
         System.out.println("0. Salir");
-        System.out.print("Seleccione una opci�n: ");
+        System.out.print("Seleccione una opción: ");
     }
 
     private static int leerOpcion(BufferedReader teclado) throws IOException {
@@ -114,10 +114,10 @@ public class AgendaXMEN {
                 System.out.println("------------------------------------------");
                 // Comprobamos si la agenda tiene contactos
                 if (listaContactos.isEmpty()) {
-                    System.out.println("La agenda est� vac�a actualmente.");
+                    System.out.println("La agenda está vacía actualmente.");
                 } else {
                     // Encabezado seg�n el ejemplo del PDF
-                    System.out.println("ID\tNOMBRE\t\tTEL�FONO\tEMAIL");
+                    System.out.println("ID\tNOMBRE\t\tTELÉFONO\tEMAIL");
                     // Usamos un Iterator, que es una de las interfaces a evaluar
                     Iterator<ContacXMen> it = listaContactos.iterator();
                     int i = 1; // Contador para el ID visual [1], [2], etc.
@@ -133,11 +133,25 @@ public class AgendaXMEN {
             case 2:
                 System.out.println("Mostrando contenido resumido de la agenda:");
                 System.out.println("------------------------------------------");
+                if (listaContactos.isEmpty()) {
+                    System.out.println("\tLa agenda está vacía.");
+                } else {
+                    Iterator<ContacXMen> itCompleto = listaContactos.iterator();
+                    int i = 1;
 
+                    while (itCompleto.hasNext()) {
+                        ContacXMen contacto = itCompleto.next();
+                        // Al imprimir 'contacto', se ejecuta su toString() y los de sus padres
+                        System.out.println("[" + i + "] " + contacto.toString());
+                        i++;
+                    }
+                }
+
+                System.out.println("Pulse intro para continuar.");
                 Utiles.Pausar();
                 break;
             case 3:
-                System.out.println("->->->-> Rellenando con los cl�sicos ->->->->");
+                System.out.println("->->->-> Rellenando con los clásicos ->->->->");
                 System.out.println("------------------------------------------");
                 // Creamos unos cuantos XMen usando el constructor completo de tu clase XMen
                 // Parametros: frase, esAnonimo, usaArtefactos, nombre, edad, altura, sexo
@@ -245,6 +259,7 @@ public class AgendaXMEN {
                         System.out.println("\tNo hay ningun heroe a eliminar.");
                     }
                 }
+                Utiles.Pausar();
                 break;
             case 10:
                 System.out.println("10. Activar XMen");
@@ -252,8 +267,18 @@ public class AgendaXMEN {
                 break;
             case 99:
                 System.out.println("99. Vaciar Agenda");
-
-
+                if (listaContactos.isEmpty()) {
+                    System.out.println("No hay nada en la agenda");
+                }else {
+                    char respuesta=Leer.confirmarSoN("¿Quieres elimirar toda la agenda? (s/n)");
+                    if (respuesta == 's'|| respuesta == 'S') {
+                        listaContactos.clear();//Eliminamos todo los heroes/civiles de la agenda
+                        System.out.println("\tLa agenda ha sido borrada");
+                    }else  {
+                        System.out.println("Operaicon cancelada");
+                    }
+                }
+                Utiles.Pausar();
                 break;
             case 0:
                 System.out.println("0. Saliendo de los contactos");
