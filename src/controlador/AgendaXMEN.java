@@ -21,7 +21,7 @@ import modelos.*;
 public class AgendaXMEN {
 //---------------------------------------------------------------------------------
 
-    private static TreeSet<ContacXMen> listaContactos = new TreeSet();
+    private static TreeSet<ContacXMen> listaContactos = new TreeSet<>();
     //---------------------------------------------------------------------------------
     private static final String USER_VALIDO = "profesorx";
     private static final String PASS_VALIDO = "macarena";
@@ -166,7 +166,7 @@ public class AgendaXMEN {
                 ContacXMen c3 = new ContacXMen(tormenta, "666000333", "tormenta@xmen.org");
                 ContacXMen c4 = new ContacXMen(bestia, "666000115", "bestia@xmen.org");
 
-                // Los a�adimos al TreeSet (se ordenar�n solos por el compareTo)
+                // Los añaadimos al TreeSet (se ordenar�n solos por el compareTo)
                 listaContactos.add(c1);
                 listaContactos.add(c2);
                 listaContactos.add(c3);
@@ -176,17 +176,17 @@ public class AgendaXMEN {
                 Utiles.Pausar();
                 break;
             case 4:
-                System.out.println("A�adiendo XMen con sus datos b�sicos:");
+                System.out.println("Añádiendo XMen con sus datos básicos:");
                 System.out.println("------------------------------------------");
 
                 //Pedir datos
                 String nombre = Leer.LeerCadena("Introduce el nombre: ");
-                String tlf = Leer.LeerTelefono("Introduce su tel�fono: ");
+                String telefono = Leer.LeerTelefono("Introduce su tel�fono: ");
                 String mail = Leer.LeerEmail("Introduce su email: ");
                 XMen nuevoXmen = new XMen("Sin frase", false, false, nombre, 0);
 
-                //Crear el contacto y a�adirlo
-                ContacXMen nuevoContacto = new ContacXMen(nuevoXmen, tlf, mail);
+                //Crear el contacto y añadirlo
+                ContacXMen nuevoContacto = new ContacXMen(nuevoXmen, telefono, mail);
                 //Control de datos
                 if (listaContactos.add(nuevoContacto)) {
                     System.out.println("Datos introducidos correctamente.");
@@ -198,13 +198,58 @@ public class AgendaXMEN {
                 break;
             case 5:
                 System.out.println("5. Editar XMen por nombre");
+                String nombreAEditar=Leer.LeerCadena("Introduce el nombre del superhéroe: ");
+                ContacXMen contactoEncontrado=null;
+                //barremos con un fore para buscar el contacto/XMen
+                for (ContacXMen c : listaContactos) {
+                    if (c.getPersona().getNombre().equalsIgnoreCase(nombreAEditar)) {
+                        contactoEncontrado=c;
+                        break;
+                    }
+                }
+                if (contactoEncontrado!=null) {
+                    //Actualicemos telefono y email
+                    String nuevoTelefono=Leer.LeerTelefono("Introduce el nuevo telefono: ");
+                    String nuevoMail=Leer.LeerEmail("Introduce el nuevo email: ");
+                    contactoEncontrado.setTelefono(nuevoTelefono);
+                    contactoEncontrado.setEmail(nuevoMail);
+                    System.out.println("Datos editados correctamente.");
+                }else {
+                    System.out.println("No se encontro el contacto");
+                }
+                Utiles.Pausar();
                 break;
             case 6:
-                System.out.println("6. Buscar Superh�roe por n�mero de posici�n");
+                System.out.println("6. Buscar Superhéroe por número de posición");
+                System.out.println("------------------------------------------");
+                if (listaContactos.isEmpty()) {
+                    System.out.println("\tLa agenda está vacía.");
+                }else {
+                    int numBusqueda=Leer.LeerEnteroPositivo("Introduce la posición del XMen: ");
+                    if (numBusqueda>listaContactos.size()) {
+                        System.out.println("\tError: Los IDs que hay son: " + listaContactos.size());
+                    }else{
+                        Iterator<ContacXMen> itNumero = listaContactos.iterator();
+                        ContacXMen encontrado=null;
+                        int contador=1;
+                        while (itNumero.hasNext()) {
+                            ContacXMen actual=itNumero.next();
+                            if (contador==numBusqueda) {
+                                encontrado=actual;
+                                break;
+                            }
+                            contador++;
+                        }
+                        if (encontrado!=null) {
+                            System.out.println(encontrado.toString());
+                        }
+                    }
+                }
+                Utiles.Pausar();
                 break;
             case 7:
                 System.out.println("7. Busca Xmen por nombre");
-                String nombreBuscar = Leer.LeerCadena("Introduce el nombre del superh�roe a buscar: ");
+                String nombreBuscar = Leer.LeerCadena("Introduce el nombre del superhéroe a buscar: ");
 
                 boolean encontrado = false;
                 Iterator<ContacXMen> itBusqueda = listaContactos.iterator();
@@ -212,11 +257,11 @@ public class AgendaXMEN {
                 while (itBusqueda.hasNext() && !encontrado) {
                     ContacXMen contactoActual = itBusqueda.next();
 
-                    // Comparamos el nombre ignorando may�sculas/min�sculas
+                    // Comparamos el nombre ignorando mayúsculas/minúsculas
                     if (contactoActual.getPersona().getNombre().equalsIgnoreCase(nombreBuscar)) {
-                        System.out.println("\n�Superh�roe encontrado!");
+                        System.out.println("\nSuperhéroe encontrado");
                         System.out.println("------------------------------------------");
-                        // Usamos el m�todo presentarInfo() de la clase Persona (que XMen sobreescribe)
+                        // Usamos el método presentarInfo() de la clase Persona (que XMen sobreescribe)
                         contactoActual.getPersona().presentarInfo();
                         System.out.println("Teléfono: " + contactoActual.getTelefono());
                         System.out.println("Email: " + contactoActual.getEmail());
